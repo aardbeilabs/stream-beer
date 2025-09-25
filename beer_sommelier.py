@@ -3,7 +3,7 @@ import google.generativeai as genai
 from utils import load_csv_data, load_prompt
 
 # load config
-model_name = "gemini-1.5-flash"
+model_name = "gemini-2.5-flash-lite"
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
 
@@ -15,6 +15,7 @@ beer_prompt = load_prompt("beer_prompt_v1.md")
 def create_sidebar():
     with st.sidebar:
 
+        # st.expander("Feedback & Contacts", expanded=True)
         st.image("logo.jpg", use_container_width=True)
 
         st.divider()
@@ -31,16 +32,15 @@ def create_sidebar():
         st.write("**John:** Beer Viking")
         st.write("**Anna:** Beer Valkyrie")
 
-        st.divider()
-
-        st.markdown("📝 **[Submit Feedback](https://docs.google.com/forms/u/1/d/e/1FAIpQLSeBKl46W85lykhEDy4HQtEdpUoRKg1LcBjidLKZVbhrySy16g/viewform?usp=header)**")
-
 
 def main():
+
     st.set_page_config(page_title="Valhalla Beer Club", page_icon="🍺")
     create_sidebar()
+
     st.title("🍺 Valhalla Beer Chat")
     st.caption("⚠️ This app is a prototype and things may change in the future")
+    st.markdown("📝 **[Submit Feedback](https://docs.google.com/forms/u/1/d/e/1FAIpQLSeBKl46W85lykhEDy4HQtEdpUoRKg1LcBjidLKZVbhrySy16g/viewform?usp=header)**")
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
